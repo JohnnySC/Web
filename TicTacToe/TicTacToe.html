@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+	<TITLE>TIC TAC TOE</TITLE>
+	<script type="text/javascript">
+
+	window.onload = function(){
+		document.getElementById("cell0").onclick = function(evt){doStep(0);}
+		document.getElementById("cell1").onclick = function(evt){doStep(1);}
+		document.getElementById("cell2").onclick = function(evt){doStep(2);}
+		document.getElementById("cell3").onclick = function(evt){doStep(3);}
+		document.getElementById("cell4").onclick = function(evt){doStep(4);}
+		document.getElementById("cell5").onclick = function(evt){doStep(5);}
+		document.getElementById("cell6").onclick = function(evt){doStep(6);}
+		document.getElementById("cell7").onclick = function(evt){doStep(7);}
+		document.getElementById("cell8").onclick = function(evt){doStep(8);}
+
+	initCells();
+	}
+	
+		function Cells(item, number, isEmpty){
+			this.item = item;
+			this.number = number;
+			this.isEmpty = isEmpty;
+		}
+		
+		function initCells(){
+			cells = [];
+				for(var j=0;j<9;j++)
+				{
+					cells[j] = new Cells(document.getElementById("cell"+j),0,true);
+					cells[j].item.src = "empty.png";
+				}
+			changePlayer();
+			count=0;
+			isTheEnd = "no";
+		}
+
+		function changePlayer(){
+			playerName = document.getElementById("playerName");
+			if(playerName.value=="1")
+				playerName.value=playerName.innerHTML="2";
+			else 
+				playerName.value=playerName.innerHTML="1";				
+			}
+
+		function doStep(number){			
+				if(isTheEnd==="no" && cells[number].isEmpty){
+					if(playerName.value=="1"){
+						cells[number].item.src="X.png";
+						cells[number].number=1;
+					}
+					else{
+						cells[number].item.src="O.png";
+						cells[number].number=2;
+					}
+				cells[number].isEmpty=false;
+				count++;
+				checkTheEnd();
+				changePlayer();
+				}					
+		}
+
+		function checkTheEnd(){ 
+			for(var i=0; i<3; i++){
+				if(cells[3*i].number==cells[3*i+1].number && cells[3*i+1].number==cells[3*i+2].number && cells[3*i].number>0 ||
+					cells[i].number== cells[i+3].number && cells[i+3].number==cells[i+6].number && cells[i].number>0)
+						isTheEnd = "yes";
+			}
+				if( cells[0].number==cells[4].number && cells[4].number==cells[8].number && cells[8].number>0 ||
+					cells[2].number==cells[4].number && cells[4].number==cells[6].number && cells[2].number>0 )
+						isTheEnd = "yes";
+			showGameOver();
+		}
+
+		function showGameOver(){
+			if(isTheEnd=="yes")
+				document.getElementById("GameOver").innerHTML = "Game Over! Player "+playerName.value+" won!";
+			else if(count==9)
+				document.getElementById("GameOver").innerHTML = "Game Over! Draw";
+			}
+
+	</script>
+</HEAD >
+<BODY>
+	<div style="margin-top: 50px; text-align: center;">
+		<h3 >Player <b id="playerName">_</b></h3>
+		<img id="cell0" src="" alt="cell0" />
+		<img id="cell1" src="" alt="cell1" />
+		<img id="cell2" src="" alt="cell2" /><br>
+		<img id="cell3" src="" alt="cell3" />
+		<img id="cell4" src="" alt="cell4" />
+		<img id="cell5" src="" alt="cell5" /><br>
+		<img id="cell6" src="" alt="cell6" />
+		<img id="cell7" src="" alt="cell7" />
+		<img id="cell8" src="" alt="cell8" /><br>
+		<h4 id="GameOver"> </h4>
+	</div>
+</BODY>
+</HTML>

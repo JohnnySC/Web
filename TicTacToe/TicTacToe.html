@@ -26,11 +26,10 @@
 		
 		function initCells(){
 			cells = [];
-				for(var j=0;j<9;j++)
-				{
-					cells[j] = new Cells(document.getElementById("cell"+j),0,true);
-					cells[j].item.src = "empty.png";
-				}
+			for(var j=0;j<9;j++){
+				cells[j] = new Cells(document.getElementById("cell"+j),0,true);
+				cells[j].item.src = "empty.png";
+			}
 			changePlayer();
 			count=0;
 			isTheEnd = "no";
@@ -45,20 +44,20 @@
 			}
 
 		function doStep(number){			
-				if(isTheEnd==="no" && cells[number].isEmpty){
-					if(playerName.value=="1"){
-						cells[number].item.src="X.png";
-						cells[number].number=1;
-					}
-					else{
-						cells[number].item.src="O.png";
-						cells[number].number=2;
-					}
-				cells[number].isEmpty=false;
-				count++;
-				checkTheEnd();
-				changePlayer();
-				}					
+			if(isTheEnd==="no" && cells[number].isEmpty){
+				if(playerName.value=="1"){
+					cells[number].item.src="X.png";
+					cells[number].number=1;
+				}
+				else{
+					cells[number].item.src="O.png";
+					cells[number].number=2;
+				}
+			cells[number].isEmpty=false;
+			count++;
+			checkTheEnd();
+			changePlayer();
+			}					
 		}
 
 		function checkTheEnd(){ 
